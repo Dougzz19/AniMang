@@ -1,0 +1,75 @@
+ion-content{
+    --ion-background-color: #faf202;
+}
+
+ion-header{
+    position: absolute;
+}
+
+ion-toolbar{
+    --ion-background-color: transparent;
+    --opacity: 0;
+}
+
+.signin-btns{
+    margin-top: 25px;
+    text-align: center;
+    span{
+        font-size: 13px;
+        font-weight: normal;
+        color: #f5410a;
+    }
+}
+
+.loginbtn{
+    --ion-color-primary:#f5410a;
+}
+
+.text-tag{
+    margin-top: 40px;
+    text-align: center;
+    span{
+        font-size: 13px;
+        font-weight: normal;
+        color: #f5410a;
+    }
+}
+
+.password-tag{
+    margin-top: 10px;
+    text-align: center;
+    span{
+        font-size: 13px;
+        font-weight: normal;
+        color: #f5410a;
+    }
+}
+
+.social-btns{
+    text-align: center;
+    ion-button{
+        width: 40px;
+        padding-left: 5px;
+    }
+}
+
+.wrapform{
+    margin-top: 30px;
+}
+
+ion-item{
+    --boder-color:  #abf5e4;
+    --highlight-color-focused: #248770;
+    --padding-start: 0;
+    --inner-padding-end:0;
+    ion-input{
+        color: #f5410a;
+    }
+}
+
+.password_forgot{
+    text-align: right;
+    ion-button{
+        font-size: 12px;
+    }
+}

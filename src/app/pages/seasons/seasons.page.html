@@ -1,0 +1,53 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-title>Seasons</ion-title>
+  </ion-toolbar>
+
+
+  <ion-list >
+    <ion-item    > 
+      <ion-select placeholder="Select Year" okText="Choose year" cancelText="Cancel Choice"  
+      (ionChange)="handleChange($event)"
+     >
+
+        <ion-select-option *ngFor="let item of seasons" value="{{item.year}}" >{{item.year}}</ion-select-option>          
+      </ion-select>
+            
+      <ion-select interface="action-sheet" placeholder="Select Season" cancelText="Cancel Choice"
+      (ionChange)="selectedYear($event)"
+      >
+        <ion-select-option value="winter">Winter</ion-select-option>
+        <ion-select-option value="spring">Spring</ion-select-option>
+        <ion-select-option value="summer">Summer</ion-select-option>
+        <ion-select-option value="fall">Fall</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" (click)="seasonSearch(airYear, airSeason)" slot="left"
+    >Serch</ion-button
+  >
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let item of animes" [routerLink]="item.mal_id">
+        <ion-card button>
+          <img [src]="item.images.jpg.image_url">
+          <ion-card-content>
+            <ion-label>
+              {{ item.title}}
+              <p>Listed Episodes:{{item.episodes}}</p>
+              <p *ngFor="let studio of item.studios">Studio: {{studio.name}}</p>
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content 
+    loadingSpinner="bubbles"
+    loadingText="Loading more data..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

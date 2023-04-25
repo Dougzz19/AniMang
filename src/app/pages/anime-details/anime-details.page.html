@@ -1,0 +1,82 @@
+<!--
+  Code to display and style how the data is presented to the
+  user
+-->
+
+<!--
+  Simillar to bootstrap and html tags ionic has it's own set of tags that
+  can be used to store data in various ways. Each tag starts with "Ion".
+-->
+<ion-header>
+  <!--
+    Setting th toolbar in the header to the color primary
+  -->
+  <ion-toolbar color="primary">
+    <!--
+      The title of the page will be whatever is returned in the "anime.data.title"
+      value that is being passed. This anime value is in the anime-details page
+      and it is there the data is being requested and recevied and stored into variables
+      to use here. The reason why anime has "?" in front if it is because this is a safe
+      navigator that stops errors. The error shows up because anime is null for a few seconds
+      before data is passed into it.
+    -->
+    <ion-title>{{anime?.data.title}}</ion-title>
+    <!--
+      Creating the back button with more ionic tags. The back button is being
+      stored as a button with the start position on the left. The back button when
+      pressed then brings the user back to "/animes" page.
+    -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/animes"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <!--
+      This image tag sets the image to the large jpg image provided by the API
+    -->
+     <img [src]="anime?.data.images.jpg.large_image_url">         
+     <ion-card-header>
+      <ion-card-title>{{anime?.data.title}}</ion-card-title>
+       <!--
+        *ngFor is angular code used to loop through data kinda like an array
+        in this span the data loops through the genres returned from the api to get 
+        the name of the genre. The isLast property just checks if something is the last
+        item. If it is then leave ot blank if it isn't add "."
+       -->
+      <span *ngFor="let g of anime?.data.genres let isLast = last">
+        {{g.name}} {{!isLast ? '.':''}}
+       </span>  
+     </ion-card-header>
+
+     <ion-card-content>
+      <ion-label color="">{{anime?.data.synopsis}}</ion-label>  
+      
+      <ion-item lines="none">
+        <!--
+          Ionic has various different icons that can be looked at on their ionicions
+          website. These two icons being used diplays a camera to represent which
+          studio made the show and the latter has a calender to see when the show starts
+          and ends.
+        -->
+        <ion-icon name="videocam" slot="start"></ion-icon>
+        <ion-label *ngFor="let studio of anime?.data.studios">Studio: {{studio.name}}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>Aired: {{anime?.data.aired.string}}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+          <ion-tab-button tab="add" slot="end" routerLink="/make-review">
+            <ion-icon name="chatbubbles"></ion-icon>
+            <ion-label>Leave a review</ion-label>
+          </ion-tab-button>
+          </ion-item>
+
+     </ion-card-content>
+  </ion-card>
+</ion-content>

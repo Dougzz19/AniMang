@@ -1,0 +1,19 @@
+<ion-content>
+  
+  <ion-list >
+    <ion-item    > 
+      <ion-select placeholder="Select Genre" okText="Choose genre" cancelText="Cancel Choice"  multiple="true"
+      (ionChange)="selectedGenre($event)"
+     >
+
+        <ion-select-option *ngFor="let item of genres" value="{{item.mal_id}}" >{{item.name}}</ion-select-option>          
+      </ion-select>
+
+    </ion-item>
+    <ion-button type="submit" (click)="updateGenre(genreSelected)" slot="left" (click)="closeModal()"
+    >Serch</ion-button
+  >
+  </ion-list>
+  
+</ion-content>
+

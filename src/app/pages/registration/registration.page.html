@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>  
+    <ion-title>Register User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+	<ion-card>
+		<ion-img src="assets\images\shonenJump.jpg"></ion-img>
+	</ion-card>
+
+
+  <ion-card-content>
+		<div class="wrapform">
+  <form>    
+    <ion-item>
+      <ion-icon name="mail-outline"></ion-icon>		     
+    <ion-input type="text" #email required placeholder="Email"></ion-input>
+    </ion-item> 
+
+	  	<ion-item>
+			<ion-icon name="lock-closed-outline"></ion-icon>		
+			<ion-input type="password" #password required placeholder="***************"></ion-input>
+			</ion-item>
+
+    <div class="signin-btns">
+    <ion-row>
+      <ion-col> 
+      <ion-button 
+      fill="solid"
+			shape="round"
+			class="loginbtn"
+      type="submit" 
+      (click)="signUp(email, password)"       
+      >Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  </form>
+  </div>
+</ion-card-content>
+</ion-content>

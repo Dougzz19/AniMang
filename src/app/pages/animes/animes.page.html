@@ -1,0 +1,40 @@
+
+<!--
+  Code to display and style how the data is presented to the
+  user
+-->
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let item of animes | paginate
+      : {
+          itemsPerPage: 25,
+          currentPage: currentPage,
+          totalItems: 60
+        }
+    " [routerLink]="item.mal_id">
+        <ion-card button>
+          <img [src]="item.images.jpg.image_url">
+          <ion-card-content>
+            <ion-label>
+              {{ item.title}}
+              <p>Listed Episodes:{{item.episodes}}</p>
+              <p *ngFor="let studio of item.studios">Studio: {{studio.name}}</p>
+            </ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-footer>
+  <div class="d-flex justify-content-center">
+    <pagination-controls 
+    class="paginator"       
+    previousLabel="Prev"
+    nextLabel="Next"
+    (pageChange)="onChange($event)">
+  </pagination-controls>
+  </div>
+</ion-footer>
+</ion-content>

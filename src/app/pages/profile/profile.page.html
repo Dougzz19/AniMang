@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+     Profile
+    </ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<div class="container">
+		<div class="overlay">
+		<ion-avatar (click)="openOptionSelection()">
+			<img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile.imageUrl" />
+			<ng-template #placheolder_avatar>
+				<div class="fallback">
+					<p>Select avatar</p>
+				</div>
+			</ng-template>
+		</ion-avatar>
+		</div>
+	</div>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>
+				{{name}}
+			</ion-card-title>	
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item lines="none">
+				<ion-icon name="heart"></ion-icon>
+				<ion-label>Favourite Anime: </ion-label>
+			</ion-item>
+			<br>
+			<ion-item lines="none">
+				<ion-icon name="book"></ion-icon>
+				<ion-label>Favourite Manga: </ion-label>
+			</ion-item>
+		</ion-card-content>
+
+	</ion-card>
+	<ion-footer>
+		<ion-button (click)="openFypEdit()" >Edit Fyp</ion-button>
+	</ion-footer>
+</ion-content>
