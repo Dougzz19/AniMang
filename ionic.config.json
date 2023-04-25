@@ -1,5 +1,7 @@
 {
   "name": "AniMang",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

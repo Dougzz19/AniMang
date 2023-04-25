@@ -19,7 +19,7 @@ export class AnimesPage implements OnInit {
 
   //Using loading controller provided by ionic angular that returns a promise
   constructor(private animeService: AnimeService, 
-    private avatarService : AvatarService,) { 
+    private avatarService : AvatarService, private loadingCtrl: LoadingController) { 
       this.avatarService.getUserProfile().subscribe((data)=>{
         this.profile = data
         this.randomGenre = Math.floor(Math.random() * this.profile.favGenre.length)+0; 
@@ -34,9 +34,16 @@ export class AnimesPage implements OnInit {
 
   
 
-  fetchAnimes() {
+  async fetchAnimes() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+
         //Carrys out simillar process as getting the details of one anime
         this.animeService.getAnimeGenre(this.currentPage,this.genre).subscribe(res =>{         
+          loading.dismiss();
           this.animes = res.data;  
           this.allAnime = res.pagination.items.total;
           console.log("Getting Data For genre"+this.genre);
