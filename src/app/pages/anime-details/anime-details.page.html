@@ -1,31 +1,32 @@
 <!--
   Code to display and style how the data is presented to the
   user
--->
 
+-->
 <!--
   Simillar to bootstrap and html tags ionic has it's own set of tags that
   can be used to store data in various ways. Each tag starts with "Ion".
--->
+
 <ion-header>
-  <!--
+  
     Setting th toolbar in the header to the color primary
-  -->
+
   <ion-toolbar color="primary">
-    <!--
+  
       The title of the page will be whatever is returned in the "anime.data.title"
       value that is being passed. This anime value is in the anime-details page
       and it is there the data is being requested and recevied and stored into variables
       to use here. The reason why anime has "?" in front if it is because this is a safe
       navigator that stops errors. The error shows up because anime is null for a few seconds
       before data is passed into it.
-    -->
+ 
     <ion-title>{{anime?.data.title}}</ion-title>
+    -->
     <!--
       Creating the back button with more ionic tags. The back button is being
       stored as a button with the start position on the left. The back button when
       pressed then brings the user back to "/animes" page.
-    -->
+   
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/animes"></ion-back-button>
     </ion-buttons>
@@ -34,18 +35,19 @@
 
 <ion-content>
   <ion-card>
-    <!--
+   
       This image tag sets the image to the large jpg image provided by the API
-    -->
+  
      <img [src]="anime?.data.images.jpg.large_image_url">         
      <ion-card-header>
       <ion-card-title>{{anime?.data.title}}</ion-card-title>
+       -->
        <!--
         *ngFor is angular code used to loop through data kinda like an array
         in this span the data loops through the genres returned from the api to get 
         the name of the genre. The isLast property just checks if something is the last
         item. If it is then leave ot blank if it isn't add "."
-       -->
+    
       <span *ngFor="let g of anime?.data.genres let isLast = last">
         {{g.name}} {{!isLast ? '.':''}}
        </span>  
@@ -55,12 +57,14 @@
       <ion-label color="">{{anime?.data.synopsis}}</ion-label>  
       
       <ion-item lines="none">
+           -->
         <!--
           Ionic has various different icons that can be looked at on their ionicions
           website. These two icons being used diplays a camera to represent which
           studio made the show and the latter has a calender to see when the show starts
           and ends.
         -->
+          <!--
         <ion-icon name="videocam" slot="start"></ion-icon>
         <ion-label *ngFor="let studio of anime?.data.studios">Studio: {{studio.name}}</ion-label>
       </ion-item>
@@ -80,3 +84,86 @@
      </ion-card-content>
   </ion-card>
 </ion-content>
+
+-->
+
+
+<ion-content>
+  <ion-slides pager="true" class="product-slider">
+    <ion-slide>
+      <img [src]="anime?.data.images.jpg.large_image_url"> 
+    </ion-slide>
+    <ion-slide>
+      <img [src]="anime?.data.trailer.images.large_image_url"> 
+    </ion-slide>
+  </ion-slides>
+
+  <div class="ion-padding-vertical">
+    <h1 class="item-name">{{anime?.data.title}}</h1>
+
+    <h4 class="price" >
+      <span *ngFor="let g of anime?.data.genres let isLast = last">
+	    {{g.name}} {{!isLast ? '.':''}}
+	  </span>
+    </h4>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="review" *ngFor="let studio of anime?.data.studios">
+    <ion-row>
+      <ion-col size="6">		
+        <div class="rating">
+           <ion-badge slot="end">Score: {{anime?.data.score}}</ion-badge>
+        </div>
+      </ion-col>
+	  
+      <ion-col size="6">
+		<ion-icon name="videocam" slot="start"></ion-icon>
+        <div class="count">Studio: {{studio.name}}</div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="description">
+    <h5>Description</h5>
+
+    <p>
+     {{anime?.data.synopsis}}
+    </p>
+
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="description">
+    <h5>Characters</h5>
+
+    <p>
+     {{anime?.data.synopsis}}
+    </p>
+
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="full" color="light">Add to cart</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="full">Buy now</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

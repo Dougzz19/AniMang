@@ -9,7 +9,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Plugins} from '@capacitor/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-
+import { arrayUnion, doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
 @Component({
   selector: 'app-uploads',
   templateUrl: './uploads.page.html',
@@ -77,6 +77,7 @@ async takePicture(type) {
 			await loading.present();
 
 			const result = await this.avatarService.uploadPost(image,this.desc);
+
 			loading.dismiss();
 
 			if (!result) {

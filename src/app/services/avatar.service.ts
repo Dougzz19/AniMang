@@ -54,7 +54,8 @@ export class AvatarService {
 			await updateDoc(userDocRef, {
 				posts: arrayUnion({
 					postImage,
-					desc
+					desc,
+					likes: []
 				})
 			});
 			return true;
