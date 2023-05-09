@@ -17,13 +17,10 @@ export class AnimeDetailsPage implements OnInit {
   anime = null;
   characaters: any;
   recomendations: any;
-
   id : any;
-
+  showToAdd = null;
   currentPage = 1;
-  currentPageRec = 1;
   allCharacters: number = 0;
-  allRecomendations: number = 0;
   //In the consturctor it contains a variable route which is of type ActivatedRoute
   //what this dose is that it keeps track of the id of a singular anime and displays
   //the data as fromatted on the anime details html page for that anime with the 

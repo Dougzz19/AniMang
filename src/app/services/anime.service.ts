@@ -34,6 +34,8 @@ export interface Image {
   small_image_url: string;
   large_image_url: string;
 }
+
+
 //
 export interface ApiResult {
   data: Daum[]
@@ -238,7 +240,7 @@ export class AnimeService {
     return this.http.get(this.animeIdApi+id );
   }
 
-  getRelatedAnime(id: string){
-    return this.http.get(this.animeIdApi+id+"/recommendations");
+  getRelatedAnime(id: string): Observable<ApiResults>{
+    return this.http.get<ApiResults>(this.animeIdApi+id+"/recommendations");
   }
 }
