@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimeService } from 'src/app/services/anime.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-anime-details',
@@ -21,7 +22,7 @@ export class AnimeDetailsPage implements OnInit {
 
   //The animeService variable is of type AnimeService which is our service component
   //this has all the information on the methods being used to make the specific API calls
-  constructor(private route: ActivatedRoute, private animeService: AnimeService) { }
+  constructor(private route: ActivatedRoute, private animeService: AnimeService, public  sanitizer:DomSanitizer) { }
 
 
   ngOnInit() {

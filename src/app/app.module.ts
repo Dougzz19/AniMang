@@ -21,7 +21,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
 import { PaginatePipe } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +44,7 @@ import { PaginatePipe } from 'ngx-pagination';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [VideoPlayer,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

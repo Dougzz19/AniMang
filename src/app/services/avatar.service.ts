@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import { arrayUnion, doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
 import { getDownloadURL, ref, Storage, uploadString } from '@angular/fire/storage';
 import { Photo } from '@capacitor/camera';
 
@@ -29,6 +29,33 @@ export class AvatarService {
 			const userDocRef = doc(this.firestore, `users/${user.uid}`);
 			await updateDoc(userDocRef, {
 				imageUrl: userImage
+			});
+			return true;
+		} catch (e) {
+			return null;
+		}
+	}
+
+	async uploadPost(cameraFile: Photo, desc: String) {
+		const randomId = Math.random()
+		.toString(36)
+		.substring(2, 8);
+		
+		const user = this.auth.currentUser;
+		const path = `uploads/${user.uid}/${new Date().getTime()}_${randomId}`;
+		const storageRef = ref(this.storage, path);
+
+		try {
+			await uploadString(storageRef, cameraFile.base64String, 'base64');
+
+			const postImage = await getDownloadURL(storageRef);
+
+			const userDocRef = doc(this.firestore, `users/${user.uid}`);
+			await updateDoc(userDocRef, {
+				posts: arrayUnion({
+					postImage,
+					desc
+				})
 			});
 			return true;
 		} catch (e) {

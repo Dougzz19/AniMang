@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
 import { IonicModule } from '@ionic/angular';
 
 import { AnimeDetailsPageRoutingModule } from './anime-details-routing.module';

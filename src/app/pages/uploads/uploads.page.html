@@ -1,0 +1,18 @@
+<ion-content>
+  <div class="container">
+		<div class="overlay">
+      <ion-card>
+        <img *ngIf="profile?.postImage;" [src]="profile.postImage">
+        <ion-card-content>
+          <ion-textarea placeholder="Add a comment?" 
+          [(ngModel)]="desc">
+        </ion-textarea>
+        <ion-buttons shape="round" color="primary" (click)="openOptionSelection()">
+          Post Photo
+        </ion-buttons>
+        </ion-card-content>       
+      </ion-card>
+		</div>
+	</div>
+
+</ion-content>

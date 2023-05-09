@@ -30,6 +30,10 @@ const routes: Routes = [
         loadChildren: () => import('../seasons/seasons.module').then( m => m.SeasonsPageModule)
       },
       {
+        path: 'uploads',
+        loadChildren: () => import('../uploads/uploads.module').then( m => m.UploadsPageModule)
+      },
+      {
         path: 'animes/:id',
         loadChildren: () => import('../anime-details/anime-details.module').then( m => m.AnimeDetailsPageModule)
       },

@@ -9,44 +9,46 @@ import { AnimeService } from 'src/app/services/anime.service';
 })
 export class TopAnimePage implements OnInit {
 //Empty array of anime to keep track of the animes
-animes = [];  
+animes : any;  
 currentPage = 1;
+allAnime: number = 0;
+profile: any;
+genre: any; 
+randomGenre:number;
 
 //Using loading controller provided by ionic angular that returns a promise
-constructor(private animeService: AnimeService, private loadingCtrl: LoadingController) { }
+constructor(private animeService: AnimeService, 
+  private loadingCtrl: LoadingController) { 
+  
+    
+  }
 
 ngOnInit() {
-  this.loadAnime();
+  this.fetchAnimes();
+   console.log(this.fetchAnimes());
 }
 
-//This function sets up a loading feature
-async loadAnime(event? : InfiniteScrollCustomEvent){
+
+
+async fetchAnimes() {
   const loading = await this.loadingCtrl.create({
     message: 'Loading..',
     spinner: 'bubbles',
   });
   await loading.present();
-  
-  //This will only be excuted after the loading is finished 
-  //Carrys out simillar process as getting the details of one anime
-  this.animeService.getTopAnime(this.currentPage).subscribe(res =>{      
-    //When data is recived the loading stops 
-    loading.dismiss();
-    //Pushing the data in results to our empty array
-    this.animes.push(...res.data)  
-    console.log("Getting Data");
-    console.log(res);
 
-    event?.target.complete();
-    if(event){
-      event.target.disabled = res.pagination.last_visible_page === this.currentPage;
-    }
-  });
+      //Carrys out simillar process as getting the details of one anime
+      this.animeService.getTopAnime(this.currentPage).subscribe(res =>{         
+        loading.dismiss();
+        this.animes = res.data;  
+        this.allAnime = res.pagination.items.total;        
+        console.log(res);      
+      });
 }
 
-loadMore(event : InfiniteScrollCustomEvent){
-  this.currentPage++;
-  this.loadAnime(event);
+onChange(event : number){
+  this.currentPage = event++;
+  this.fetchAnimes();
 }
 
 }
