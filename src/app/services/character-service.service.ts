@@ -78,4 +78,9 @@ export class CharacterServiceService {
   api = "https://api.jikan.moe/v4/anime/"
 
   constructor(private http: HttpClient) { }
+
+  getCharacters(id: string): Observable<ApiResult>{
+    return this.http.get<ApiResult>(this.api+id+"/characters");
+  }
+
 }

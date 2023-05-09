@@ -146,13 +146,45 @@
 
   <div class="description">
     <h5>Characters</h5>
+    <ion-list>
+      <ion-item *ngFor="let item of characaters | paginate
+      :{
+        itemsPerPage: 4,
+        currentPage: currentPage,
+        totalItems: allCharacters 
+      }">
+        <ion-avatar slot="start">
+          <img [src]="item.character.images.jpg.image_url">
+        </ion-avatar>
+   
+        <ion-label class="ion-text-wrap">
+          <h3>{{ item.character.name }}</h3>          
+        </ion-label>
+   
+        <ion-badge slot="end"> {{ item.role }} </ion-badge>
+      </ion-item>
+    </ion-list>
+    <div class="d-flex justify-content-center">
+      <pagination-controls 
+      class="paginator"       
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onChange($event)">
+      </pagination-controls>
+      </div>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+  <div class="description">
+    <h5>Description</h5>
 
     <p>
      {{anime?.data.synopsis}}
     </p>
 
   </div>
-
   <div class="seperator">
     <hr>
   </div>
