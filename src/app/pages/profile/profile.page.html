@@ -61,14 +61,13 @@
 		<ion-button  (click)="btnClick()" >Make a Post</ion-button>
     </ion-label>
   </ion-item>
+
+
 <ion-content>
-<ion-grid>
+
 <ion-row class="ion-justify-content-center" *ngFor="let item of post">
 <ion-card>
-	<img [src]="item.postImage">
-	<ion-card-content>
-		{{item.desc}}
-	</ion-card-content>	
+	<img src="https://ucarecdn.com/{{ item.image }}/-/smart_resize/440x300/">
 	  <ion-footer>
 		<ion-col center text-center>
 		  <button>
@@ -79,5 +78,6 @@
 	</ion-footer>
   </ion-card>
 </ion-row>	
-</ion-grid>
+
 </ion-content>
+

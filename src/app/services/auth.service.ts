@@ -1,12 +1,22 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as auth from 'firebase/auth';
 import { User } from '../shared/users';
+import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+
+
+export interface Message {
+	id: string;
+	from: string;
+	msg: string;
+	fromName: string;
+	myMsg: boolean;
+  }
 
 @Injectable({
 	providedIn: 'root'

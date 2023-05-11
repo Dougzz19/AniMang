@@ -25,6 +25,7 @@ import { VideoPlayer } from '@ionic-native/video-player/ngx';
 import { PaginatePipe } from 'ngx-pagination';
 
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, 

@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('../anime-details/anime-details.module').then( m => m.AnimeDetailsPageModule)
       },
       {
+        path: 'post/:id',
+        loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
+      },
+      {
         path: '',
         redirectTo: '/menu/animes',
         pathMatch: 'full'

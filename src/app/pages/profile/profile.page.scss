@@ -1,7 +1,17 @@
+#images {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	max-width: 100%;
+	width: 606px;
+}
 
-ion-grid {
-  --ion-grid-padding-sm: 20px;
-  --ion-grid-padding-md: 30px;
-  --ion-grid-padding-lg: 40px;
-  --ion-grid-padding-xl: 100px;
+.image {
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.main-image, .user-image {
+	width: 200px;
+	height: 200px;
 }

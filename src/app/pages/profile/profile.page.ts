@@ -41,8 +41,7 @@ export class ProfilePage implements OnInit {
         this.avatarService.getUserProfile().subscribe((data)=>{
           this.profile = data;
           this.name = this.profile['displayName'];
-          this.post = this.profile['posts']
-          console.log(this.profile['displayName'])
+          this.post = this.profile['posts']       
         })
       }
 

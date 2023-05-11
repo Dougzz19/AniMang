@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { ProfilePhotoComponent } from 'src/app/components/profile-photo/profile-photo.component';
@@ -7,88 +7,86 @@ import { Camera, CameraResultType, CameraSource  } from '@capacitor/camera';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Plugins} from '@capacitor/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { arrayUnion, doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import{HttpClient} from '@angular/common/http';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-uploads',
   templateUrl: './uploads.page.html',
   styleUrls: ['./uploads.page.scss'],
 })
 export class UploadsPage implements OnInit {
-  photo : any;
-  name: any
-  desc: string
-  profile: any;
-  picImage:any;
-  imageUpload: AngularFireUploadTask;
-  
 
-  constructor(private modalController: ModalController,
-    private db : AngularFirestore,
+  imageURL: any
+  desc: any
+  profile: any
+
+  @ViewChild('fileButton') fileButton
+  name: any;
+
+  constructor(
+  
     private avatarService : AvatarService,
-    private storage : AngularFireStorage,
-    private loadingCtrl: LoadingController,
-    private plt: Platform,
-    private toastCtrl: ToastController ,
-    private alertCtrl : AlertController  
+
+    private http : HttpClient,
+    private afstore: AngularFirestore,
+    private router: Router
+    
    ) {
-    this.plt = plt;
-      this.avatarService.getUserProfile().subscribe((data)=>{
-        this.profile = data;
-        this.name = this.profile['displayName'];
-        console.log(this.profile['displayName'])
-      })
-    }
+    this.avatarService.getUserProfile().subscribe((data)=>{
+      this.profile = data['uid']
+      this.name = data['displayName'];
+
+    })
+   }
 
   ngOnInit() {
   }
 
-  async openOptionSelection() {
-    const modal = await this.modalController.create({
-      component: ProfilePhotoComponent,
-      cssClass: 'transparent-modal'
-    });
+uploadFile(){
+  this.fileButton.nativeElement.click()
 
-    modal.onDidDismiss()
-    .then(res => {
-      console.log("result:"+res.data);
-      if (res.role !== 'backdrop') {
-        this.takePicture(res.data);
-      }
-    });
-    return await modal.present();  
 }
 
-async takePicture(type) {
-  console.log("Type is:"+type)
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource[type]
-    });
-    this.photo = image;
-    console.log(this.photo);
+  createPost(){
+    const image = this.imageURL
+    const desc = this.desc
 
-    if (this.photo) {
-     this.picImage = this.photo
-			const loading = await this.loadingCtrl.create();
-			await loading.present();
+    this.afstore.doc(`users/${this.profile}`).update({
+      posts: arrayUnion({image})
+    })
 
-			const result = await this.avatarService.uploadPost(image,this.desc);
+    this.afstore.doc(`posts/${image}`).set({
+      posts: arrayUnion({desc,
+      author: this.name,
+      likes: []
+    })
+    })
 
-			loading.dismiss();
 
-			if (!result) {
-				const alert = await this.alertCtrl.create({
-					header: 'Upload failed',
-					message: 'There was a problem uploading your post.',
-					buttons: ['OK']
-				});
-				await alert.present();
-			}
-		}
-  } 
+    this.router.navigate(['/menu/profile']);
 
+  }
+
+  fileChanged(event: Event) {
+    let files = (event.target as any).files;
+    
+    const data = new FormData()
+    data.append('file',files[0])
+    data.append('UPLOADCARE_STORE','1')
+    data.append('UPLOADCARE_PUB_KEY','1d4871ef92beb8c1583f' )
+
+    this.http.post('https://upload.uploadcare.com/base/', data ).subscribe(
+      event => {
+        console.log(event);
+        this.imageURL = JSON.parse(JSON.stringify(event)).file;
+
+      }
+    )
+    }
 }
