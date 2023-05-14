@@ -107,6 +107,10 @@ async takePicture(type) {
     this.router.navigate(['/menu/uploads']);
   }
 
+  goTo(postID : string){
+    this.router.navigate(['/menu/post/'+postID]);
+  }
+
   async ngOnInit() {
 
   }

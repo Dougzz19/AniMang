@@ -9,15 +9,6 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 
-
-export interface Message {
-	id: string;
-	from: string;
-	msg: string;
-	fromName: string;
-	myMsg: boolean;
-  }
-
 @Injectable({
 	providedIn: 'root'
 })

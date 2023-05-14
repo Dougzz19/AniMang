@@ -66,7 +66,7 @@
 <ion-content>
 
 <ion-row class="ion-justify-content-center" *ngFor="let item of post">
-<ion-card>
+<ion-card (click)="goTo(item.image)">
 	<img src="https://ucarecdn.com/{{ item.image }}/-/smart_resize/440x300/">
 	  <ion-footer>
 		<ion-col center text-center>
