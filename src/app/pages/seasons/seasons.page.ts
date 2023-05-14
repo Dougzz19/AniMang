@@ -14,6 +14,7 @@ export class SeasonsPage implements OnInit {
     seasons = [];  
     animes = []
     currentPage = 1;
+    allAnime: number = 0;
 
      airSeason: string;
      airYear: string;
@@ -68,5 +69,9 @@ export class SeasonsPage implements OnInit {
     
   }
   
+  onChange(event : number){
+    this.currentPage = event++;
+    this.loadAnime();
+  }
 
 }

@@ -1,13 +1,15 @@
 @media(min-width: 768px) {
     .mobile-header {
       display: none;
+      background: #eb3e31;
     }
   
     .header {
       display: flex;
-      background: #fff;
+      background: #eb3e31;
       padding-left: 40px;
       padding-right: 40px;
+      
     }
   }
   
@@ -18,6 +20,7 @@
   
     .header {
       display: none;
+     
     }
   }
   
@@ -25,15 +28,4 @@
     border-bottom: 2px solid var(--ion-color-primary);
   }
   
-  .dropdown {
-      width: 136px;
-      height: 150px;
-      background: #fff;
-      position: absolute;
-      top: 40px;
-      left: 100px;
-      z-index: 1;
-      ion-item:hover {
-          --ion-item-color: var(--ion-color-primary);
-      }
-  }
+ 

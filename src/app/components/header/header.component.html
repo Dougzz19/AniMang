@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button fill="clear" color="dark" routerLink="/menu/profile" routerDirection="root" routerLinkActive="active-item"
+      <ion-button fill="clear" color="light" routerLink="/menu/profile" routerDirection="root" routerLinkActive="active-item"
       [routerLinkActiveOptions]="{exact: true}">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
@@ -15,31 +15,21 @@
 
 <ion-row class="header ion-align-items-center">
   <ion-col size="2" class="ion-align-items-center">
-    <img src="https://ionicacademy.com/wp-content/uploads/2020/02/ionic-Logo.svg" width="50px">
+    <img src="assets\images\AniMang.png" width="100px">
   </ion-col>
   <ion-col size="8" class="ion-text-left">
-    <ion-button fill="clear" color="dark" routerLink="/menu/animes" routerDirection="root" routerLinkActive="active-item"
+    <ion-button fill="clear" color="light" routerLink="/menu/animes" routerDirection="root" routerLinkActive="active-item"
       [routerLinkActiveOptions]="{exact: true}">
       For you
+    </ion-button>    
+    <!-- Button with dropdown -->
+    <ion-button #productbtn  fill="clear" color="light"
+      routerLink="/menu/seasons" routerDirection="root" routerLinkActive="active-item">
+       Seasons     
     </ion-button>
-    <ion-button fill="clear" color="dark" routerLink="/menu/top-anime" routerDirection="root" routerLinkActive="active-item">
+    <ion-button fill="clear" color="light" routerLink="/menu/top-anime" routerDirection="root" routerLinkActive="active-item">
       Trending
     </ion-button>
-    <!-- Button with dropdown -->
-    <ion-button #productbtn (mouseenter)="dropdown=true" (mouseleave)="hideDropdown($event)" fill="clear" color="dark"
-      routerLink="/menu/seasons" routerDirection="root" routerLinkActive="active-item">
-       Seasons
-      <ion-icon slot="end" [name]="dropdown ? 'chevron-down' : 'chevron-up'"></ion-icon>
-    </ion-button>
-    <div *ngIf="dropdown" class="dropdown" (mouseleave)="dropdown = false" #dropdownbox>
-      <ion-item (click)="dropdown = false" routerLink="selectSeaon" [queryParams]="{ category: 'seasons'}" lines="none" routerDirection="root" >
-      Past
-      </ion-item>
-      <ion-item (click)="dropdown = false" button routerLink="upcomingSeaon" [queryParams]="{ category: 'upcoming'}"
-        lines="none" routerDirection="root" >
-        Upcoming
-      </ion-item>
-    </div>
   </ion-col>
   <ion-col size="2" class="ion-text-right">
     <ion-button fill="clear" color="dark" routerLink="/menu/profile" >

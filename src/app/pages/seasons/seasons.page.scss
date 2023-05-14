@@ -4,3 +4,25 @@ ion-grid {
     --ion-grid-padding-lg: 40px;
     --ion-grid-padding-xl: 100px;
 }
+
+.paginator {
+    .ngx-pagination {
+        padding: 0;
+        li:not(.current, .pagination-next, .pagination-previous) {
+            background: rgba(235, 235, 235, 1);
+        }
+  
+        a,
+        .current {
+            padding: 1rem 1.5rem;
+        }
+    }
+  }
+
+  ion-card{
+    background-color: #eb3e31;
+  }
+  
+  ion-footer{
+    background-color: #eb3e31;
+  }

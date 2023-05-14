@@ -1,9 +1,4 @@
 <ion-header >
-  <ion-toolbar color="primary">
-    <ion-title>Seasons</ion-title>
-  </ion-toolbar>
-
-
   <ion-list >
     <ion-item    > 
       <ion-select placeholder="Select Year" okText="Choose year" cancelText="Cancel Choice"  
@@ -30,24 +25,38 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let item of animes" [routerLink]="item.mal_id">
-        <ion-card button>
-          <img [src]="item.images.jpg.image_url">
-          <ion-card-content>
-            <ion-label>
-              {{ item.title}}
-              <p>Listed Episodes:{{item.episodes}}</p>
-              <p *ngFor="let studio of item.studios">Studio: {{studio.name}}</p>
-            </ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content 
-    loadingSpinner="bubbles"
-    loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-row class="ion-justify">
+      <ion-col  size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let item of animes | paginate
+      : {
+          itemsPerPage: 25,
+          currentPage: currentPage,
+          totalItems: allAnime 
+        }
+    " [routerLink]="item.mal_id">
+<ion-card>
+  <ion-card-header>      
+      <ion-card-title class="ion-bold"> {{ item.title}}</ion-card-title>
+      <ion-card-subtitle *ngFor="let studio of item.studios"> Studio: {{studio.name}}</ion-card-subtitle>
+  </ion-card-header>
+  <img [src]="item.images.jpg.image_url">
+  <ion-card-content>
+    <ion-label>      
+      <p>Listed Episodes:{{item.episodes}}</p>
+      <ion-badge slot="end">Score: {{item.score}}</ion-badge>
+    </ion-label>
+  </ion-card-content>
+</ion-card>
+</ion-col>
+</ion-row>
+</ion-grid>
 </ion-content>
+<ion-footer>
+<div class="d-flex justify-content-center">
+<pagination-controls 
+class="paginator"       
+previousLabel="Prev"
+nextLabel="Next"
+(pageChange)="onChange($event)">
+</pagination-controls>
+</div>
+</ion-footer>
