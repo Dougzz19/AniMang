@@ -1,12 +1,4 @@
 
-
-<ion-toolbar color="primary">
-
-
-  <ion-buttons slot="start">
-    <ion-back-button defaultHref="/seasons"></ion-back-button>
-  </ion-buttons>
-  </ion-toolbar>
   
   <ion-content>
     <ion-slides pager="true" class="product-slider">
@@ -100,14 +92,14 @@
     <div class="seperator">
       <hr>
     </div>
-  </ion-content>
   <ion-footer>
     <ion-row>
       <ion-col size="6">
         <ion-button expand="full" color="light">Staff</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="full" color="danger">News</ion-button>
+        <ion-button expand="full" color="danger" (click)="goTo(anime?.data.mal_id)">News</ion-button>
       </ion-col>
     </ion-row>
   </ion-footer>
+</ion-content>
