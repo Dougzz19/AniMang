@@ -1,0 +1,30 @@
+<ion-content>
+    <ion-list   >
+      <ion-item *ngFor="let item of news | paginate
+      :{
+        itemsPerPage: 10,
+        currentPage: currentPage,
+        totalItems: allNews 
+      }">
+        <ion-avatar slot="start">
+          <img [src]="item.images.jpg.image_url">
+        </ion-avatar>
+  
+        <ion-label class="ion-text-wrap" >
+          <h3>{{ item.excerpt }}</h3>  
+          <h3>Link:</h3>       
+          <p>{{item.url}}</p>             
+        </ion-label>
+  
+        <ion-badge slot="end"> {{ item.author_username }} </ion-badge>
+      </ion-item>
+    </ion-list>
+    <div class="d-flex justify-content-center">
+      <pagination-controls 
+      class="paginator"       
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onChange($event)">
+      </pagination-controls>
+      </div>
+</ion-content>

@@ -1,0 +1,116 @@
+
+
+<ion-toolbar color="primary">
+
+
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/seasons"></ion-back-button>
+  </ion-buttons>
+  </ion-toolbar>
+  
+  <ion-content>
+    <ion-slides pager="true" class="product-slider">
+      <ion-slide>
+        <img [src]="anime?.data.images.jpg.large_image_url"> 
+      </ion-slide>
+      <ion-slide>
+        <img [src]="anime?.data.trailer.images.large_image_url"> 
+      </ion-slide>
+    </ion-slides>
+  
+    <div class="ion-padding-vertical">
+      <h1 class="item-name">{{anime?.data.title}}</h1>
+  
+      <h4 class="price" >
+        <span *ngFor="let g of anime?.data.genres let isLast = last">
+        {{g.name}} {{!isLast ? '.':''}}
+      </span>
+      </h4>
+    </div>
+  
+    <div class="seperator">
+      <hr>
+    </div>
+  
+    <div class="review" *ngFor="let studio of anime?.data.studios">
+      <ion-row>
+        <ion-col size="6">		
+          <div class="rating">
+             <ion-badge slot="end">Score: {{anime?.data.score}}</ion-badge>
+          </div>
+        </ion-col>
+      
+        <ion-col size="6">
+      <ion-icon name="videocam" slot="start"></ion-icon>
+          <div class="count">Studio: {{studio.name}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+  
+    <div class="seperator">
+      <hr>
+    </div>
+  
+    <div class="description">
+      <h5>Description</h5>
+  
+      <p>
+       {{anime?.data.synopsis}}
+      </p>
+  
+    </div>
+  
+    <div class="seperator">
+      <hr>
+    </div>
+  
+    <div class="description">
+      <h5>Characters</h5>
+      <ion-list>
+        <ion-item *ngFor="let item of characaters | paginate
+        :{
+          itemsPerPage: 4,
+          currentPage: currentPage,
+          totalItems: allCharacters 
+        }">
+          <ion-avatar slot="start">
+            <img [src]="item.character.images.jpg.image_url">
+          </ion-avatar>
+     
+          <ion-label class="ion-text-wrap">
+            <h3>{{ item.character.name }}</h3>          
+          </ion-label>
+     
+          <ion-badge slot="end"> {{ item.role }} </ion-badge>
+        </ion-item>
+      </ion-list>
+      <div class="d-flex justify-content-center">
+        <pagination-controls 
+        class="paginator"       
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onChange($event)">
+        </pagination-controls>
+        </div>
+    </div>
+  
+    <div class="seperator">
+      <hr>
+    </div>
+    <div class="seperator">
+      <hr>
+    </div>
+  </ion-content>
+  <ion-footer>
+    <div *ngFor="let studio of anime?.data.studios">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" color="light">Staff</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" (click)="goTo(anime?.data.mal_id)">News</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-footer>
+  

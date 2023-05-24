@@ -42,6 +42,18 @@ const routes: Routes = [
         loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
       },
       {
+        path: 'seasons/:id',
+        loadChildren: () => import('../season-details/season-details.module').then( m => m.SeasonDetailsPageModule)
+      },
+      {
+        path: 'top-anime/:id',
+        loadChildren: () => import('../treding-details/treding-details.module').then( m => m.TredingDetailsPageModule)
+      },
+      {
+        path: 'news/:id',
+        loadChildren: () => import('../news/news.module').then( m => m.NewsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/menu/animes',
         pathMatch: 'full'

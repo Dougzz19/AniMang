@@ -6,11 +6,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-anime-details',
-  templateUrl: './anime-details.page.html',
-  styleUrls: ['./anime-details.page.scss'],
+  selector: 'app-treding-details',
+  templateUrl: './treding-details.page.html',
+  styleUrls: ['./treding-details.page.scss'],
 })
-export class AnimeDetailsPage implements OnInit {
+export class TredingDetailsPage implements OnInit {
   anime = null;
   characaters: any;
   recomendations: any;
@@ -34,7 +34,6 @@ export class AnimeDetailsPage implements OnInit {
     this.animeService.getAnimeDetails( this.id).subscribe(res=>{
       console.log("This already works")
       this.anime = res      
-      console.log(this.anime.data.producers.mal_id)
     })
   }
 
@@ -59,5 +58,3 @@ export class AnimeDetailsPage implements OnInit {
   }
 
   }
-
- 

@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from 'src/app/services/anime.service';
-import { CharacterServiceService } from 'src/app/services/character-service.service';
+import { NewsService } from 'src/app/services/news.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-anime-details',
-  templateUrl: './anime-details.page.html',
-  styleUrls: ['./anime-details.page.scss'],
+  selector: 'app-news',
+  templateUrl: './news.page.html',
+  styleUrls: ['./news.page.scss'],
 })
-export class AnimeDetailsPage implements OnInit {
-  anime = null;
-  characaters: any;
+export class NewsPage implements OnInit {
+  news = null;  
   recomendations: any;
   id : any;
   
   currentPage = 1;
-  allCharacters: number = 0;
+  allNews: number = 0;
 
   constructor(private route: ActivatedRoute, 
     private animeService: AnimeService, 
     public  sanitizer:DomSanitizer,
-    private characterService: CharacterServiceService,
+    private router: Router,
+    private newsService: NewsService,
     private loadingCtrl: LoadingController) { }
 
 
@@ -30,12 +30,6 @@ export class AnimeDetailsPage implements OnInit {
     this.id  = this.route.snapshot.paramMap.get('id')
     console.log( this.id)
     this.fetchAnimes()
-
-    this.animeService.getAnimeDetails( this.id).subscribe(res=>{
-      console.log("This already works")
-      this.anime = res      
-      console.log(this.anime.data.producers.mal_id)
-    })
   }
 
   async fetchAnimes() {
@@ -45,10 +39,10 @@ export class AnimeDetailsPage implements OnInit {
     });
     await loading.present();
        
-        this.characterService.getCharacters( this.id).subscribe(res =>{         
+    this.newsService.getNews( this.currentPage,this.id).subscribe(res=>{
           loading.dismiss();
-          this.characaters = res.data;
-          this.allCharacters = this.characaters.length
+          this.news = res.data;
+          this.allNews = this.news.length
           console.log(res);      
         });
   }
@@ -58,6 +52,4 @@ export class AnimeDetailsPage implements OnInit {
     this.fetchAnimes();
   }
 
-  }
-
- 
+}

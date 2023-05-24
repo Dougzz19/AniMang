@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from 'src/app/services/anime.service';
 import { CharacterServiceService } from 'src/app/services/character-service.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-anime-details',
-  templateUrl: './anime-details.page.html',
-  styleUrls: ['./anime-details.page.scss'],
+  selector: 'app-season-details',
+  templateUrl: './season-details.page.html',
+  styleUrls: ['./season-details.page.scss'],
 })
-export class AnimeDetailsPage implements OnInit {
-  anime = null;
+export class SeasonDetailsPage implements OnInit {
+ anime = null;
   characaters: any;
   recomendations: any;
   id : any;
@@ -22,6 +22,7 @@ export class AnimeDetailsPage implements OnInit {
   constructor(private route: ActivatedRoute, 
     private animeService: AnimeService, 
     public  sanitizer:DomSanitizer,
+    private router: Router,
     private characterService: CharacterServiceService,
     private loadingCtrl: LoadingController) { }
 
@@ -34,7 +35,6 @@ export class AnimeDetailsPage implements OnInit {
     this.animeService.getAnimeDetails( this.id).subscribe(res=>{
       console.log("This already works")
       this.anime = res      
-      console.log(this.anime.data.producers.mal_id)
     })
   }
 
@@ -58,6 +58,9 @@ export class AnimeDetailsPage implements OnInit {
     this.fetchAnimes();
   }
 
+  
+  goTo(postID : string){
+    this.router.navigate(['/menu/news/'+postID]);
   }
 
- 
+  }
