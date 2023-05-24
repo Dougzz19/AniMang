@@ -25,3 +25,20 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-footer{
+    background-color: #eb3e31;
+  }
+
+  .paginator {
+    .ngx-pagination {
+        padding: 0;
+        li:not(.current, .pagination-next, .pagination-previous) {
+            background: rgb(235, 235, 235);
+        }
+  
+        a,
+        .current {
+            padding: 1rem 1.5rem;
+        }
+    }
+  }

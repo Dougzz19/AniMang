@@ -19,6 +19,8 @@
         <ion-badge slot="end"> {{ item.author_username }} </ion-badge>
       </ion-item>
     </ion-list>
+  </ion-content>
+    <ion-footer>
     <div class="d-flex justify-content-center">
       <pagination-controls 
       class="paginator"       
@@ -27,4 +29,4 @@
       (pageChange)="onChange($event)">
       </pagination-controls>
       </div>
-</ion-content>
+      </ion-footer>
