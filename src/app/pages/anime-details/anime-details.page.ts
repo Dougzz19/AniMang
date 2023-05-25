@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnimeService } from 'src/app/services/anime.service';
 import { CharacterServiceService } from 'src/app/services/character-service.service';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -22,6 +22,7 @@ export class AnimeDetailsPage implements OnInit {
   constructor(private route: ActivatedRoute, 
     private animeService: AnimeService, 
     public  sanitizer:DomSanitizer,
+    private router: Router,
     private characterService: CharacterServiceService,
     private loadingCtrl: LoadingController) { }
 
@@ -56,6 +57,11 @@ export class AnimeDetailsPage implements OnInit {
   onChange(event : number){
     this.currentPage = event++;
     this.fetchAnimes();
+  }
+
+  
+  goTo(postID : string){
+    this.router.navigate(['/menu/news/'+postID]);
   }
 
   }
